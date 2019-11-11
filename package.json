@@ -21,16 +21,23 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "^5.0.2",
+    "@testing-library/react": "^9.3.2",
+    "@types/jest": "^24.0.22",
     "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-preset-gatsby": "^0.2.21",
     "cypress": "^3.6.1",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-cypress": "^2.7.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.0.3",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "hooks": "^0.3.2",
     "husky": "^3.0.9",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
     "lint-staged": "^9.4.2",
     "prettier": "^1.18.2"
   },
@@ -44,7 +51,7 @@
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "test": "jest",
     "cy:open": "cypress open"
   },
   "husky": {

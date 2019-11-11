@@ -159,3 +159,103 @@ Then we want to create a new .eslintrc.json file inside of the cypress folder be
   }
 }
 ```
+
+# Adding Jest for Integration and Unit Testing
+
+1. Install Packages
+
+```javascript
+npm i -D jest @testing-library/react identity-obj-proxy
+```
+
+Jest is a testing platform.
+
+2. Set up a tests folder at the component level:
+   components/forms/contact.js
+   components/forms/subscribe.js
+   components/forms/**tests**
+
+3. Create a file inside of **tests** that is the same name as the file that we want to test:
+
+```javascript
+components / forms / __tests__ / subscribe.js
+
+import React from "react"
+import { render } from "@testing-library/react"
+import Subscribe from "../subscribe"
+
+test("temp", () => {
+  expect(true).toBe(true)
+})
+```
+
+4. Set up the tests to run inside of package.json:
+
+```javascript
+"test" : "jest"
+```
+
+5. Set up a Babel configuration so that we can use React from tests.
+
+```javascript
+npm i -D babel-jest babel-preset-gatsby
+```
+
+6. Set up a jest.config.js file
+
+```javascript
+module.exports = {
+  transform: {
+    "^.+\\.jsx?$": `<rootDir>/tests/jest-preprocess.js`,
+  },
+  moduleNameMapper: {
+    ".+\\.(css|styl|less|sass|scss)$": `identity-obj-proxy`,
+    ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": `<rootDir>/test/file-mock.js`,
+  },
+  testPathIgnorePatterns: [`node_modules`, `.cache`, `public`],
+  transformIgnorePatterns: [`node_modules/(?!(gatsby)/)`],
+  globals: {
+    __PATH_PREFIX__: ``,
+  },
+  testURL: `http://localhost`,
+  setupFiles: [`<rootDir>/loadershim.js`],
+}
+```
+
+7. Set up the tests/jest-preprocess.js file:
+
+```javascript
+const babelOptions = {
+  presets: ["babel-preset-gatsby"],
+}
+
+module.exports = require("babel-jest").createTransformer(babelOptions)
+```
+
+8. Set up file-mock.js inside of the tests directory:
+
+```javascript
+module.exports = "test-file-stub"
+```
+
+9. Set up the loadershim.js file:
+
+```javascript
+global.___loader = {
+  enqueue: jest.fn(),
+}
+```
+
+# Writing Additional Tests
+
+```javascript
+test("subscribe renders first name and email", () => {
+  var { getByLabelText, debug } = render(<Subscribe />)
+
+  debug()
+})
+```
+
+## Running yarn test --watch will start us up in watch mode
+
+### npm run test --watch will not start watch mode
