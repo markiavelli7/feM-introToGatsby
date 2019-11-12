@@ -99,3 +99,22 @@ var NavLink = styled(Link)`
   font-weight: ${props => props.fontWeight || "normal"};
 `
 ```
+
+## Gatsby and GraphQL
+
+### Adding site metadata
+
+1. Add some site metadata to the gatsby-config.js file:
+
+```javascript
+module.exports = {
+  siteMetadata: {
+    title: "Frontend Masters Gatsby Workshop",
+    description: "Riddit dit do do. From the Nard Dog.",
+  },
+}
+```
+
+If we want to add site metadata in gatsby-config.js, the property name siteMetadat is required.
+
+Any time that we make changes to the GraphQL end of the site, we have to restart the server to see the changes.
