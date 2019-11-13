@@ -9,6 +9,17 @@ function usePosts() {
             title
             slug
             author
+            topImage {
+              sharp: childImageSharp {
+                fluid(
+                  maxWidth: 150
+                  maxHeight: 150
+                  duotone: { shadow: "#663399", highlight: "#ddbbff" }
+                ) {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
           excerpt
         }
@@ -19,6 +30,7 @@ function usePosts() {
     title: post.frontmatter.title,
     author: post.frontmatter.author,
     slug: post.frontmatter.slug,
+    topImage: post.frontmatter.topImage,
     excerpt: post.excerpt,
   }))
 }
